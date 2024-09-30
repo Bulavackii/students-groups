@@ -5,6 +5,7 @@
 
     <form action="{{ route('groups.store') }}" method="POST">
         @csrf
+        
         <label for="title">Название группы:</label>
         <input type="text" name="title" id="title" required>
 

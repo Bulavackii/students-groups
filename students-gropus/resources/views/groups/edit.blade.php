@@ -6,6 +6,7 @@
     <form action="{{ route('groups.update', $group->id) }}" method="POST">
         @csrf
         @method('PUT')
+
         <label for="title">Название группы:</label>
         <input type="text" name="title" id="title" value="{{ $group->title }}" required>
 

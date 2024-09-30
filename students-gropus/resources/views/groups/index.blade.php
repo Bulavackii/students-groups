@@ -17,6 +17,7 @@
                 <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить эту группу?');">Удалить группу</button>
             </form>
         </div>
+
         <hr>
     @endforeach
 @endsection

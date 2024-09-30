@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Group; 
+use App\Models\Group;
 
 class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         $groups = Group::all();
         return view('groups.index', compact('groups'));
     }
@@ -19,30 +20,34 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         return view('groups.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'start_from' => 'required|date',
-            'is_active' => 'sometimes|boolean', 
+            'is_active' => 'sometimes|boolean',
         ]);
-    
-        $validatedData['is_active'] = $request->has('is_active') ? 1 : 0; 
-    
+
+        $validatedData['is_active'] = $request->has('is_active') ? 1 : 0;
+
         Group::create($validatedData);
-    
-        return redirect()->route('groups.index')->with('success', 'Группа успешно создана!'); 
+
+        return redirect()->route('groups.index')->with('success', 'Группа успешно создана!');
     }
+
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(string $id)
+    {
         $group = Group::findOrFail($id);
         return view('groups.show', compact('group'));
     }
@@ -50,7 +55,8 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
+    public function edit(string $id)
+    {
         $group = Group::findOrFail($id);
         return view('groups.edit', compact('group'));
     }
@@ -58,7 +64,8 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
+    public function update(Request $request, string $id)
+    {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'start_from' => 'required|date',
@@ -75,10 +82,10 @@ class GroupController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-{
-    $group = Group::findOrFail($id);
-    $group->delete();
+    {
+        $group = Group::findOrFail($id);
+        $group->delete();
 
-    return redirect()->route('groups.index')->with('success', 'Группа удалена успешно!');
-}
+        return redirect()->route('groups.index')->with('success', 'Группа удалена успешно!');
+    }
 }
